@@ -49,7 +49,6 @@ class Player:
     def collect_cards(self, cards):
         self.hand.extend(cards)
 
-
 def play_war_game():
     deck = Deck()
     deck.shuffle()
