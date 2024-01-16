@@ -49,28 +49,12 @@ class Player:
     def collect_cards(self, cards):
         self.hand.extend(cards)
 
-class AI(Player):
-    def __init__(self):
-        self.hand = []
-
-    def add_to_hand(self, card):
-        self.hand.append(card)
-
-    def play_card(self):
-        if len(self.hand) > 0:
-            return self.hand.pop(0)
-        else:
-            return None
-        
-    def collect_cards(self, cards):
-        self.hand.extend(cards)
-    
 def play_war_game():
     deck = Deck()
     deck.shuffle()
 
     player = Player()
-    ai = AI()
+    ai = Player()
 
     # Distribute all cards between two players
     for _ in range(26):
@@ -84,7 +68,9 @@ def play_war_game():
         ai_card = ai.play_card()
 
         round_cards.extend([player_card, ai_card])
-        print(f"Cheater: {player_card.sign} vs AI: {ai_card.sign}")
+        print(f"Cheater: {player_card.sign} vs AI: {ai_card.sign}. \t{len(player.hand)}: {len(ai.hand)}")
+        random.shuffle(player.hand)
+        random.shuffle(ai.hand)
 
         while player_card.weight == ai_card.weight:
             # Check if players have enough cards for tiebreaker
